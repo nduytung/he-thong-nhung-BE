@@ -2,6 +2,7 @@ const express = require("express");
 const Humidity = require("../models/Humidity");
 const Light = require("../models/Light");
 const Temperature = require("../models/Temperature");
+const User = require("../models/User");
 const router = express.Router();
 
 router.post("/temperature", async (req, res) => {
@@ -101,8 +102,28 @@ router.post("/light", async (req, res) => {
   }
 });
 
-router.get("/detail/celcius", async (req, res) => {
+router.get("/detail", async (req, res) => {
   try {
+    const temp = await Temperature.find().skip(User.collection.count() - 1);
+    const light = await Light.find().skip(Light.collection.count() - 1);
+    const humid = await Humidity.find().skip(Humidity.collection.count() - 1);
+
+    if (!temp || !light || !humid)
+      return res.status(404).json({
+        success: false,
+        message:
+          "Missing fields, please make sure you have inserted at lease 1 collecion before",
+      });
+
+    return res.status(200).json({
+      success: true,
+      message: "Get info successfully",
+      info: {
+        temp,
+        light,
+        humid,
+      },
+    });
   } catch (err) {
     return res
       .status(500)

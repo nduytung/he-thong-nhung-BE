@@ -84,3 +84,26 @@ router.post("/login", async (req, res) => {
       .json({ success: false, message: `Internal server error: ${err}` });
   }
 });
+
+router.get("/info/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const checkExists = await User.findOne({ _id: id });
+    if (!checkExists)
+      return res.status(404).json({
+        success: false,
+        message: "User id not found, please try with another user id",
+      });
+
+    return res.status(200).json({
+      success: true,
+      message: "Get user info successfully",
+      userInfo: { ...checkExists },
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: `Internal server error: ${err}` });
+  }
+});
