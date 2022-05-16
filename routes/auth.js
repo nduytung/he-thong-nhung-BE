@@ -107,3 +107,5 @@ router.get("/info/:id", async (req, res) => {
       .json({ success: false, message: `Internal server error: ${err}` });
   }
 });
+
+module.exports = router;
