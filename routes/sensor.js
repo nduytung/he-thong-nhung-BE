@@ -10,7 +10,7 @@ router.post("/temperature", async (req, res) => {
   if (!celcius || !fahrenheit)
     return res.status(401).json({
       success: false,
-      message: "Missing fields, please send both C and F",
+      message: "Missing fields, please send both C and F for a better result",
     });
 
   try {
