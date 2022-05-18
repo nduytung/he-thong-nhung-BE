@@ -1,0 +1,50 @@
+###
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "username":"nduytung",
+    "fullname":"nguyen duy tung",
+    "password": "1611"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username" :"nduytung",
+    "password": 160910923
+}
+
+###
+POST http://localhost:3000/sensor/temperature 
+Content-Type: application/json
+
+{
+    "celcius":160,
+    "fahrenheit": 150
+}
+
+###
+POST http://localhost:3000/sensor/humidity 
+Content-Type: application/json
+
+{
+    "humidity": 600
+}
+
+###
+POST http://localhost:3000/sensor/light 
+Content-Type: application/json
+
+{
+    "light": 200,
+    "uv" :200,
+    "windDensity": 400
+}
+
+###
+GET  http://localhost:3000/sensor/detail 
+Content-Type: application/json
+

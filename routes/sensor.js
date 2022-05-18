@@ -94,7 +94,7 @@ router.post("/light", async (req, res) => {
       });
     return res
       .status(200)
-      .json({ success: true, message: "Add new temperature successfully" });
+      .json({ success: true, message: "Add new light successfully" });
   } catch (err) {
     return res
       .status(500)
@@ -104,9 +104,9 @@ router.post("/light", async (req, res) => {
 
 router.get("/detail", async (req, res) => {
   try {
-    const temp = await Temperature.find().skip(User.collection.count() - 1);
-    const light = await Light.find().skip(Light.collection.count() - 1);
-    const humid = await Humidity.find().skip(Humidity.collection.count() - 1);
+    const temp = await Temperature.find().sort({ updatedAt: -1 }).limit(1);
+    const light = await Light.find().sort({ updatedAt: -1 }).limit(1);
+    const humid = await Humidity.find().sort({ updatedAt: -1 }).limit(1);
 
     if (!temp || !light || !humid)
       return res.status(404).json({

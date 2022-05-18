@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   const { username, fullname, password } = req.body;
+  console.log(req.body);
   if (!username || !fullname || !password)
     return res.status(401).json({
       success: false,
@@ -55,13 +56,17 @@ router.post("/login", async (req, res) => {
     });
 
   try {
-    const checkUserExists = await User.findOne({ username });
+    const checkUserExists = await User.findOne({ username }, { password: 1 });
     if (!checkUserExists)
       return res
         .status(404)
         .json({ success: false, message: "User not found, please try again" });
 
-    const validPassword = argon2.verify(checkUserExists.password, password);
+    console.log(password);
+    const validPassword = argon2.verify(
+      checkUserExists.password,
+      password.toString()
+    );
     if (!validPassword)
       return res.status(403).json({
         success: false,
