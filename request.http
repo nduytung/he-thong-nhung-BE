@@ -31,7 +31,7 @@ POST http://localhost:3000/sensor/humidity
 Content-Type: application/json
 
 {
-    "humidity": 600
+    "humidity": 7000
 }
 
 ###
@@ -39,9 +39,9 @@ POST http://localhost:3000/sensor/light
 Content-Type: application/json
 
 {
-    "light": 200,
-    "uv" :200,
-    "windDensity": 400
+    "light": 800,
+    "uv" :800,
+    "windDensity": 600
 }
 
 ###

@@ -16,7 +16,7 @@ const LightSchema = new Schema({
     required: true,
   },
   updatedAt: {
-    type: String,
+    type: Date,
     required: true,
   },
 });
